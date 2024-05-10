@@ -7,35 +7,33 @@ jenkins:
       allowAnonymousRead: false
   clouds:
   - docker:
-    name: "docker"
-    dockerApi:
-      dockerHost:
-        uri: "unix:///var/run/docker.sock"
-        templates:
-        - labelString: "docker-agent"
-          dockerTemplateBase:
-          # TODO: pin sha256 or versions when using in production
+      dockerApi:
+        connectTimeout: 60
+        dockerHost:
+          uri: "unix:///var/run/docker.sock"
+        readTimeout: 60
+      name: "Docker"
+      templates:
+      - connector: "attach"
+        dockerTemplateBase:
+          cpuPeriod: 0
+          cpuQuota: 0
           image: "jenkins/agent"
-          mounts:
-          - "type=tmpfs,destination=/run"
-          - "type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock"
-          - "type=volume,src=hello,dst=/world"
-          environmentsString: |
-          hello=world
-          foo=bar
-          remoteFs: "/home/jenkins/agent"
-            connector:
-            attach:
-              user: "jenkins"
-            instanceCapStr: "10"
-            retentionStrategy:
-              idleMinutes: 1
+        instanceCapStr: "3"
+        labelString: "docker-node"
+        name: "docker-node"
+        pullStrategy: PULL_ALWAYS
+        pullTimeout: 300
+        remoteFs: "/home/jenkins"
   crumbIssuer:
     standard:
       excludeClientIPFromCrumb: false
   disableRememberMe: false
+  disabledAdministrativeMonitors:
+  - "hudson.util.DoubleLaunchChecker"
   labelAtoms:
   - name: "built-in"
+  - name: "docker-node"
   markupFormatter: "plainText"
   mode: NORMAL
   myViewsTabBar: "standard"
@@ -111,6 +109,8 @@ unclassified:
     - "jobBuildDiscarder"
   buildStepOperation:
     enabled: false
+  casCGlobalConfig:
+    configurationPath: "/jenkins.yaml"
   email-ext:
     adminRequiredForTemplateTesting: false
     allowUnregisteredEnabled: false
@@ -120,6 +120,7 @@ unclassified:
       $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
 
       Check console output at $BUILD_URL to view the results.
+    defaultContentType: "text/plain"
     defaultSubject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!"
     defaultTriggerIds:
     - "hudson.plugins.emailext.plugins.trigger.FailureTrigger"
@@ -148,8 +149,10 @@ unclassified:
     checkForBuildAgentErrors: false
     enabled: false
     enforceUrl: false
+    gradleCaptureTaskInputFiles: true
     injectCcudExtension: false
     injectMavenExtension: false
+    mavenCaptureGoalInputFiles: true
   junitTestResultStorage:
     storage: "file"
   location:
