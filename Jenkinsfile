@@ -10,9 +10,9 @@ pipeline {
         }
         stage('Run') {
             steps {
-                // Curl command to localhost:8080
+                // Curl command to localhost:9090
                  sh 'python3 src/app.py'
-                 sh 'curl http://localhost:8080'
+                 sh 'curl http://localhost:9090'
             }
         }
     }
