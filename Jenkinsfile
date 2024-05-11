@@ -11,7 +11,8 @@ pipeline {
         stage('Run') {
             steps {
                 // Curl command to localhost:8080
-                sh 'curl http://localhost:8080'
+                 sh 'python3 src/app.py'
+                 sh 'curl http://localhost:8080'
             }
         }
     }
