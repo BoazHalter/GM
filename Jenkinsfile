@@ -1,9 +1,14 @@
 pipeline {
-     agent { label 'docker-node' } 
-    
+     agent {   
+     docker {
+        image 'python:3'
+        label 'my-build-agent'
+      }
+    }
     stages {
         stage('Build') {
             steps {
+                sh'pip install flake8' 
                 // Linting test using Flake8
                 sh 'flake8 src/app.py'
                 
