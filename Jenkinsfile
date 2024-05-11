@@ -5,7 +5,7 @@ pipeline {
             steps {
       
                 // Linting test using Flake8
-                sh 'flake8 src/app.py'
+                sh 'docker run alpine/flake8:7.0.0 flake8 src/app.py'
                 
                 // Docker build command
                 sh 'docker build -t myapp .'
