@@ -9,7 +9,7 @@ class MyHandler(BaseHTTPRequestHandler):
 
 def run():
     print('Starting server...')
-    server_address = ('', 8080)
+    server_address = ('', 9090)
     httpd = HTTPServer(server_address, MyHandler)
     print('Server started!')
     httpd.serve_forever()
