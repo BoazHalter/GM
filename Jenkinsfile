@@ -1,8 +1,5 @@
 pipeline {
-     agent {
-          image 'python:3'
-          label 'docker-node' 
-     }
+     agent {label 'docker-node' }
     stages {
         stage('Build') {
             steps {
