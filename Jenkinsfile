@@ -20,5 +20,6 @@ pipeline {
             steps {
                  sh'docker build . -t boazhalter/gm:latest'
             }
+        }
     }
 }
