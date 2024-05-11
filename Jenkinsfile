@@ -3,8 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-               # sh'sudo apt install python3' 
-               # sh'pip install flake8' 
+      
                 // Linting test using Flake8
                 sh 'flake8 src/app.py'
                 
