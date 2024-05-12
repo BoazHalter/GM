@@ -1,3 +1,16 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - gitHubApp:
+          id: "Ov23liLXEs9jXcJl8aX2"
+          owner: "BoazHalter"
+          privateKey: "{AQAAABAAAAAwNZiIaDGFNcnOw1jx0MWMR9XU1lAIswGwU6X1DuHHMPTsRkztySyue4VzkskzUI8VTAZ+NYls3Rm8Q9fqQK7xuw==}"
+      - usernamePassword:
+          id: "94d58d00-bdd1-444d-bfab-fb5b2295ec72"
+          password: "{AQAAABAAAAAQlSNAQ9I07EbCRT8lfGPkxj2I82/Cabrx37xZD0WZZqg=}"
+          scope: GLOBAL
+          username: "BoazHalter"
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
@@ -18,19 +31,21 @@ jenkins:
         dockerTemplateBase:
           cpuPeriod: 0
           cpuQuota: 0
-          image: "jenkins/agent"
-        instanceCapStr: "3"
+          image: "boazhalter/gm:jenkins-agent-latest"
+          mounts:
+          - "type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock"
+          mountsString: "type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock"
         labelString: "docker-node"
         name: "docker-node"
         pullStrategy: PULL_ALWAYS
         pullTimeout: 300
-        remoteFs: "/home/jenkins"
   crumbIssuer:
     standard:
       excludeClientIPFromCrumb: false
   disableRememberMe: false
   disabledAdministrativeMonitors:
   - "hudson.util.DoubleLaunchChecker"
+  - "jenkins.diagnostics.ControllerExecutorsAgents"
   labelAtoms:
   - name: "built-in"
   - name: "docker-node"
@@ -103,6 +118,9 @@ security:
     allowedOnController: false
   gitHostKeyVerificationConfiguration:
     sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
+  scriptApproval:
+    approvedScriptHashes:
+    - "SHA512:3f205299bef2fe3329258a42f2c60d332cc35ccb41a3ca0512d7869c6aff4561ff708c48123b4f7c3dec33ccca30d54fb8b9b51b5bc7070f96236d11a3f0bdcb"
 unclassified:
   buildDiscarders:
     configuredBuildDiscarders:
@@ -139,6 +157,8 @@ unclassified:
   gitHubConfiguration:
     apiRateLimitChecker: ThrottleForNormalize
   gitHubPluginConfig:
+    configs:
+    - name: "https://github.com/"
     hookUrl: "http://localhost:8080/github-webhook/"
   globalTimeOutConfiguration:
     operations:
@@ -162,6 +182,8 @@ unclassified:
     charset: "UTF-8"
     useSsl: false
     useTls: false
+  mavenModuleSet:
+    localRepository: "default"
   pollSCM:
     pollingThreadCount: 10
   scmGit:
