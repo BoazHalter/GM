@@ -1,4 +1,4 @@
-# GM
+# GM Devops Exam
 This repo is for deploying a docker jenkins server on windows machine localhost.<br>
 The jenkins server uses docker container as nodes.<br>
 The repo contains a pipeline Jenkinsfile for a pipeline job named gm.<br> 
