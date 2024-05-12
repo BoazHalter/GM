@@ -14,7 +14,7 @@ pipeline {
                  sh 'python3 src/app.py &'
                  script{
                       def response = sh(script: "curl -s http://localhost:9090", returnStdout: true).trim()
-                      if(response.equals("Hello GM"){
+                      if(response.equals("Hello GM")){
                            echo "Test passed"
                       }
                  }
