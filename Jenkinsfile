@@ -14,12 +14,10 @@ pipeline {
                  sh 'python3 src/app.py &'
                  script{
                       def response = sh(script: "curl -s http://localhost:9090", returnStdout: true).trim()
-                 }
-                 sh '''   
-                      if [["${response}" == "Hello GM"]];then
+                      if(response.equals("Hello GM"){
                            echo "Test passed"
-                      fi
-                    '''
+                      }
+                 }
             }
         }
          
