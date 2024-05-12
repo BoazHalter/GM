@@ -2,8 +2,7 @@ param(
 [string]$a,
 [string]$b
 )
-     
-     
+
 docker rm -f jenkins-auto
 docker run --name jenkins-auto -d -p 8080:8080 -p 50000:50000 --restart=on-failure -v //var/run/docker.sock:/var/run/docker.sock -v jenkins_home:/var/jenkins_home boazhalter/gm:jenkins-latest
 Start-Sleep -Seconds 20
