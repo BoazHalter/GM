@@ -14,6 +14,8 @@ prerequisite:<br>
 ```
 The repo contains a Jcasc jenkins.yaml which is used by the infra-install.ps1 to set the configuration of jenkins.<br>  
 The "gm" job is triggered by a push event to the current repo.<br>
-It does that by using the reverse proxy tool ngrok .<br>
+The connectivity between GitHub and the jenkins server,<br>
+is possible by using the reverse proxy tool ngrok which exposes the localhost as an https://adress .<br>
+The "gm" job pushes the artifacts to: https://hub.docker.com/repository/docker/boazhalter/gm/.
 
 
