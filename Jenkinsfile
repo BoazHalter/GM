@@ -16,9 +16,12 @@ pipeline {
                  
             }
         }
+         
         stage('Artifat') {
             steps {
+                 node{
                  sh'docker build . -t boazhalter/gm:latest'
+                 }
             }
         }
     }
