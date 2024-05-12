@@ -11,6 +11,11 @@ credentials:
           password: "{AQAAABAAAAAQlSNAQ9I07EbCRT8lfGPkxj2I82/Cabrx37xZD0WZZqg=}"
           scope: GLOBAL
           username: "BoazHalter"
+      - usernamePassword:
+          id: "dockerhubCred"
+          password: "{AQAAABAAAAAQl/Z8+n/3rJUOZOWp12EXjkeY1OIfAIqz2m1qT8AiH2I=}"
+          scope: GLOBAL
+          username: "boazhalter"
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
