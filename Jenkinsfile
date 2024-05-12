@@ -24,6 +24,7 @@ pipeline {
         stage('Artifat') {
             steps {
                  sh'docker build . -t boazhalter/gm:latest'
+                 sh'docker push boazhalter/gm:latest'                 
             }
         }
     }
