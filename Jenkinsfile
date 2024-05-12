@@ -24,8 +24,8 @@ pipeline {
         stage('Artifat') {
             steps {
                  sh'docker build . -t boazhalter/gm:latest'
-                 withCredentials([string(credentialsId: 'dockerhubCred', variable: 'dockerpwd')]) {
-                 sh "docker login -u username -p ${dockerpwd}"
+                 withCredentials([usernamePassword(credentialsId: 'dockerhubCred', usernameVariable: 'username', passwordVariable: 'password')]) {
+                 sh "docker login -u ${username} -p ${password}"
                  sh'docker push boazhalter/gm:latest'
                  }                 
             }
