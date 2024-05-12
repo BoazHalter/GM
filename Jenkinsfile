@@ -14,7 +14,7 @@ pipeline {
                  sh 'python3 src/app.py &'
                  sh '''
                        
-                      if [[`curl http://localhost:9090` == "Hello GM"];then
+                      if [["`curl http://localhost:9090`" == "Hello GM"];then
                            echo "Test passed"
                       fi
                  '''
