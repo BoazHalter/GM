@@ -9,6 +9,7 @@ node {
           sh 'curl http://localhost:9090'            
      }
      stage('Artifat') {
-          sh'docker build . -t boazhalter/gm:latest'
+          def customImage = docker.build("boazhalter/gm:${env.BUILD_ID}")
+          //sh'docker build . -t boazhalter/gm:latest'
      }
 }
