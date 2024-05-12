@@ -12,9 +12,9 @@ pipeline {
             steps {
                 // Curl command to localhost:9090
                  sh 'python3 src/app.py &'
-                 sh '''response = `curl http://localhost:9090`
-                           echo ${response}
-                      if [["${response}" == "Hello GM"];then
+                 sh '''
+                       
+                      if [[`curl http://localhost:9090` == "Hello GM"];then
                            echo "Test passed"
                       fi
                  '''
