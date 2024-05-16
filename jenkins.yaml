@@ -20,9 +20,10 @@ jenkins:
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
-  authorizationStrategy:
-    loggedInUsersCanDoAnything:
-      allowAnonymousRead: false
+  authorizationStrategy: unsecured
+  #authorizationStrategy:
+  #  loggedInUsersCanDoAnything:
+  #    allowAnonymousRead: false
   clouds:
   - docker:
       dockerApi:
