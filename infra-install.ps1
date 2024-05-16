@@ -10,7 +10,7 @@ docker cp ./jenkins.yaml jenkins-auto:/var/jenkins_home/
 Start-Sleep -Seconds 5
 
 
-docker exec jenkins-auto wget https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.13.0/jenkins-plugin-manager-2.13.0.jar
+docker exec -u0 jenkins-auto wget https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.13.0/jenkins-plugin-manager-2.13.0.jar
 docker exec jenkins-auto java -jar jenkins-plugin-manager-2.13.0.jar install-plugin configuration-as-code-groovy-plugin
 $out = docker exec jenkins-auto cat /var/jenkins_home/secrets/initialAdminPassword
 docker exec jenkins-auto java -jar jenkins-cli.jar -s http://localhost:8080 -auth ${a}:${out} reload-jcasc-configuration
