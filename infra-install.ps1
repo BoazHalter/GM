@@ -14,4 +14,5 @@ docker exec -u0 jenkins-auto wget https://github.com/jenkinsci/plugin-installati
 docker exec jenkins-auto jenkins-plugin-cli --plugins configuration-as-code:1805.v1455f39c04cf
 #docker exec jenkins-auto java -jar jenkins-plugin-manager-2.13.0.jar --war /usr/share/jenkins/jenkins.war --plugin-download-directory /var/jenkins_home/plugins/ --plugins configuration-as-code-groovy-plugin
 $out = docker exec jenkins-auto cat /var/jenkins_home/secrets/initialAdminPassword
+Start-Sleep -Seconds 5
 docker exec jenkins-auto java -jar jenkins-cli.jar -s http://localhost:8080 -auth ${a}:${out} reload-jcasc-configuration
