@@ -8,4 +8,6 @@ docker run --name jenkins-auto -d -p 8080:8080 -p 50000:50000 --restart=on-failu
 Start-Sleep -Seconds 20
 docker cp ./jenkins.yaml jenkins-auto:/var/jenkins_home/
 Start-Sleep -Seconds 5
+
+$out = docker exec jenkins-auto cat /var/jenkins_home/secrets/initialAdminPassword 
 docker exec jenkins-auto java -jar jenkins-cli.jar -s http://localhost:8080 -auth ${a}:${b} reload-jcasc-configuration
