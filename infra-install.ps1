@@ -10,4 +10,5 @@ docker cp ./jenkins.yaml jenkins-auto:/var/jenkins_home/
 Start-Sleep -Seconds 5
 
 $out = docker exec jenkins-auto cat /var/jenkins_home/secrets/initialAdminPassword 
+echo $out
 docker exec jenkins-auto java -jar jenkins-cli.jar -s http://localhost:8080 -auth ${a}:${b} reload-jcasc-configuration
